@@ -1,0 +1,14 @@
+{
+    "stryker-config": {
+        "reporters": [            
+            "dashboard",
+            "json"
+        ],
+        "log-level": "info",
+        "log-file": false,
+        "threshold-high": 80,
+        "threshold-low": 65,
+        "threshold-break": 50,
+        "mutation-level": "Standard"
+    }
+}
