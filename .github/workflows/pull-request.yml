@@ -23,7 +23,7 @@ jobs:
 
       - name: Install stryker
         run: |
-          dotnet tool install --global stryker
+          dotnet tool install --global dotnet-stryker
 
       - name: Install dependencies
         run: |
