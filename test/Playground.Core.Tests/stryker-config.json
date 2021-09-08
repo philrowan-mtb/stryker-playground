@@ -8,9 +8,6 @@
         "threshold-high": 80,
         "threshold-low": 65,
         "threshold-break": 50,
-        "mutation-level": "Standard",
-        "dashboard-project": "stryker-playground",
-        "dashboard-module": "core",
-        "dashboard-version": "1"
+        "mutation-level": "Standard"
     }
 }
