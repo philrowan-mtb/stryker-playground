@@ -9,6 +9,9 @@
         "threshold-high": 80,
         "threshold-low": 65,
         "threshold-break": 50,
-        "mutation-level": "Standard"
+        "mutation-level": "Standard",
+        "excluded-mutations": [
+            "string"        
+        ]
     }
 }
