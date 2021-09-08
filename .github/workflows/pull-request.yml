@@ -33,5 +33,5 @@ jobs:
         run: |
           git fetch origin ${{github.base_ref}}
           pushd ./test/Playground.Core.Tests
-          dotnet stryker --git-diff-target="${{ github.base_ref }}" --dashboard-compare --dashboard-fallback-version=main --baseline-storage-location=Dashboard --dashboard-api-key=${{ secrets.STRYKER_DASHBOARD_API_KEY }} --dashboard-project="github.com/${{ github.repository }}" --dashboard-version=${{ github.sha }}
+          dotnet stryker --git-diff-target="${{ github.base_ref }}" --dashboard-compare --dashboard-fallback-version=main --baseline-storage-location=Dashboard --dashboard-api-key=${{ secrets.STRYKER_DASHBOARD_API_KEY }} --dashboard-project="github.com/${{ github.repository }}" --dashboard-version=${{ github.head_ref }}
           popd
