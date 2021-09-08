@@ -1,7 +1,8 @@
 {
     "stryker-config": {
         "reporters": [            
-            "dashboard"
+            "dashboard",
+            "json"
         ],
         "log-level": "info",
         "log-file": false,
