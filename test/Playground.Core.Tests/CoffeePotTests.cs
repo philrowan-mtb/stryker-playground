@@ -37,27 +37,27 @@ namespace Playground.Core.Tests
             coffee.IsBrewScheduled.Should().BeTrue();
         }
 
-        [Fact]
-        public async Task ScheduledBrewStartsAfterScheduleTime()
-        {
-            var coffee = new CoffeePot();
-            coffee.ScheduleBrew(DateTimeOffset.Now.AddSeconds(10));
-            await Task.Delay(13 * 1000);
-            coffee.IsBrewing.Should().BeTrue();
-        }
+        //[Fact]
+        //public async Task ScheduledBrewStartsAfterScheduleTime()
+        //{
+        //    var coffee = new CoffeePot();
+        //    coffee.ScheduleBrew(DateTimeOffset.Now.AddSeconds(10));
+        //    await Task.Delay(13 * 1000);
+        //    coffee.IsBrewing.Should().BeTrue();
+        //}
 
-        [Fact]
-        public async Task ScheduledBrewOnlyRunsOnce()
-        {
-            var coffee = new CoffeePot();
-            coffee.ScheduleBrew(DateTimeOffset.Now.AddSeconds(10));
-            await Task.Delay(13 * 1000);
-            coffee.IsBrewing.Should().BeTrue();
-            coffee.IsBrewScheduled.Should().BeFalse();
-            await Task.Delay(13 * 1000);
-            coffee.IsBrewing.Should().BeTrue();
-            coffee.IsBrewScheduled.Should().BeFalse();
-        }
+        //[Fact]
+        //public async Task ScheduledBrewOnlyRunsOnce()
+        //{
+        //    var coffee = new CoffeePot();
+        //    coffee.ScheduleBrew(DateTimeOffset.Now.AddSeconds(10));
+        //    await Task.Delay(13 * 1000);
+        //    coffee.IsBrewing.Should().BeTrue();
+        //    coffee.IsBrewScheduled.Should().BeFalse();
+        //    await Task.Delay(13 * 1000);
+        //    coffee.IsBrewing.Should().BeTrue();
+        //    coffee.IsBrewScheduled.Should().BeFalse();
+        //}
 
         [Fact]
         public void CannotScheduleIfAlreadyBrewing()

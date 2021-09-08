@@ -5,10 +5,12 @@
         ],
         "log-level": "info",
         "log-file": false,
-        "timeout-ms": 10000,
         "threshold-high": 80,
         "threshold-low": 65,
         "threshold-break": 50,
-        "mutation-level": "Standard"
+        "mutation-level": "Standard",
+        "dashboard-project": "stryker-playground",
+        "dashboard-module": "core",
+        "dashboard-version": "1"
     }
 }
