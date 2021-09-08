@@ -27,15 +27,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          dotnet restore
-
-      - name: Run Tests
-        run: |
-          dotnet test --no-restore
+          dotnet restore      
 
       - name: Run mutation testing
         run: |
           git fetch origin ${{github.base_ref}}
           pushd ./test/Playground.Core.Tests
-          dotnet stryker --diff --git-diff-target="${{ github.base_ref }}"
+          dotnet stryker --diff --git-diff-target="${{ github.base_ref }}" --dashboard-compare --dashboard-fallback-version main --dashboard-api-key=${{ env.STRYKER_DASHBOARD_API_KEY }}
           popd
