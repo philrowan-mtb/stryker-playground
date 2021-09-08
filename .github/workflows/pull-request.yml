@@ -1,0 +1,41 @@
+name: Test Pull Request
+
+on:
+  pull_request:
+    branches: [ develop, main ]
+
+env:
+  DOTNET_VERSION: '3.1.x'
+  LANG: 'en_US.UTF-8'
+
+jobs:
+  test:
+    name: Test pull request
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup DotNet ${{ env.DOTNET_VERSION }} Environment
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Install stryker
+        run: |
+          dotnet tool install --global stryker
+
+      - name: Install dependencies
+        run: |
+          dotnet restore
+
+      - name: Run Tests
+        run: |
+          dotnet test --no-restore
+
+      - name: Run mutation testing
+        run: |
+          git fetch origin ${{github.base_ref}}
+          pushd ./test/Playground.Core.Tests
+          dotnet stryker --diff --git-diff-target="${{ github.base_ref }}"
+          popd
