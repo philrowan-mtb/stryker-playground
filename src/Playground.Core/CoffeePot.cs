@@ -15,6 +15,11 @@ namespace Playground.Core
             IsBrewing = true;
         }
 
+        public void StopBrew()
+        {
+            IsBrewing = false;
+        }
+
         public void ScheduleBrew(DateTimeOffset brewTime)
         {
             if (brewTime <= DateTimeOffset.Now)

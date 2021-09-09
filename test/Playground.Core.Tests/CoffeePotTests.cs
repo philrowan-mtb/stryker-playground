@@ -30,6 +30,15 @@ namespace Playground.Core.Tests
         }
 
         [Fact]
+        public void CanStopBrew()
+        {
+            var coffee = new CoffeePot();
+            coffee.StartBrew();
+            coffee.StopBrew();
+            coffee.IsBrewing.Should().BeFalse();
+        }
+
+        [Fact]
         public void CanScheduleBrew()
         {
             var coffee = new CoffeePot();
