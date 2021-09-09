@@ -2,7 +2,7 @@ name: Mutation Testing
 
 on:
   pull_request:
-    branches: [ develop, main ]
+    branches: [ main ]
 
 env:
   DOTNET_VERSION: '3.1.x'
