@@ -1,4 +1,4 @@
-name: Deploy to QA
+name: Mutation score baseline
 
 on:
   push:
