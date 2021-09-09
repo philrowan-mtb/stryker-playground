@@ -1,8 +1,9 @@
 name: Mutation score baseline
 
 on:
+  workflow_dispatch:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   mutation-baseline:
@@ -23,11 +24,14 @@ jobs:
 
       - name: Install dependencies
         run: |
-          dotnet restore      
+          dotnet restore
+
+      - name: Set output
+        id: vars
+        run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
 
       - name: Run mutation testing
         run: |
-          git fetch origin ${{github.base_ref}}
           pushd ./test/Playground.Core.Tests
-          dotnet stryker --baseline-storage-location=Dashboard --dashboard-api-key=${{ secrets.STRYKER_DASHBOARD_API_KEY }} --dashboard-project="github.com/${{ github.repository }}" --dashboard-version=${{ github.head_ref }}
+          dotnet stryker --dashboard-api-key=${{ secrets.STRYKER_DASHBOARD_API_KEY }} --dashboard-project="github.com/${{ github.repository }}" --dashboard-version=${{ steps.vars.outputs.short_ref }}
           popd
