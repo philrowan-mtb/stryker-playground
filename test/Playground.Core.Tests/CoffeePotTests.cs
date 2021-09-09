@@ -39,7 +39,7 @@ namespace Playground.Core.Tests
         }
 
         [Fact]
-        public void CanScheduleBrew()
+        public void CanScheduleBrewInTheFuture()
         {
             var coffee = new CoffeePot();
             coffee.ScheduleBrew(DateTimeOffset.Now.AddSeconds(10));
@@ -50,22 +50,9 @@ namespace Playground.Core.Tests
         public async Task ScheduledBrewStartsAfterScheduleTime()
         {
             var coffee = new CoffeePot();
-            coffee.ScheduleBrew(DateTimeOffset.Now.AddSeconds(10));
-            await Task.Delay(13 * 1000);
+            coffee.ScheduleBrew(DateTimeOffset.Now.AddSeconds(3));
+            await Task.Delay(4 * 1000);
             coffee.IsBrewing.Should().BeTrue();
-        }
-
-        [Fact]
-        public async Task ScheduledBrewOnlyRunsOnce()
-        {
-            var coffee = new CoffeePot();
-            coffee.ScheduleBrew(DateTimeOffset.Now.AddSeconds(10));
-            await Task.Delay(13 * 1000);
-            coffee.IsBrewing.Should().BeTrue();
-            coffee.IsBrewScheduled.Should().BeFalse();
-            await Task.Delay(13 * 1000);
-            coffee.IsBrewing.Should().BeTrue();
-            coffee.IsBrewScheduled.Should().BeFalse();
         }
 
         [Fact]
@@ -78,11 +65,20 @@ namespace Playground.Core.Tests
         }
 
         [Fact]
-        public void CannotScheduleInThePast()
+        public void CannotScheduleBrewInThePast()
         {
-            var coffee = new CoffeePot();
-            coffee.StartBrew();
+            var coffee = new CoffeePot();            
             Action action = () => coffee.ScheduleBrew(DateTimeOffset.Now.AddSeconds(-10));
+            action.Should().Throw<ArgumentException>();
+        }
+
+        
+        [Fact]
+        public void CannotScheduleBrewInThePresent()
+        {
+            var now = DateTimeOffset.Now;
+            var coffee = new CoffeePot();            
+            Action action = () => coffee.ScheduleBrew(now);
             action.Should().Throw<ArgumentException>();
         }
     }

@@ -22,7 +22,8 @@ namespace Playground.Core
 
         public void ScheduleBrew(DateTimeOffset brewTime)
         {
-            if (brewTime <= DateTimeOffset.Now)
+            var now = DateTimeOffset.Now;
+            if (brewTime.Date < now.Date || (brewTime.Date == now.Date && brewTime.TimeOfDay.TotalMinutes <= now.TimeOfDay.TotalMinutes))
             {
                 throw new ArgumentException("Brewing time must be in the future", nameof(brewTime));
             }
@@ -33,10 +34,7 @@ namespace Playground.Core
             }
 
             var interval = brewTime.Subtract(DateTimeOffset.Now).TotalMilliseconds;
-            _timer = new Timer(interval)
-            {
-                AutoReset = false,
-            };
+            _timer = new Timer(interval);
             _timer.Elapsed += Timer_Elapsed;
             _timer.Start();
         }
