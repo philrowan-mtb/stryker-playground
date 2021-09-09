@@ -2,7 +2,7 @@ name: Mutation score baseline
 
 on:
   push:
-    branches: [ develop ]
+    branches: [ main ]
 
 jobs:
   mutation-baseline:
