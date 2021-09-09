@@ -1,16 +1,12 @@
-name: Test Pull Request
+name: Deploy to QA
 
 on:
-  pull_request:
-    branches: [ develop, main ]
-
-env:
-  DOTNET_VERSION: '3.1.x'
-  LANG: 'en_US.UTF-8'
+  push:
+    branches: [ develop ]
 
 jobs:
-  mutation-testing:
-    name: Mutation testing
+  mutation-baseline:
+    name: Update mutation score baseline
     runs-on: ubuntu-latest
 
     steps:
@@ -33,5 +29,5 @@ jobs:
         run: |
           git fetch origin ${{github.base_ref}}
           pushd ./test/Playground.Core.Tests
-          dotnet stryker --git-diff-target="${{ github.base_ref }}" --dashboard-compare --dashboard-fallback-version=main --baseline-storage-location=Dashboard --dashboard-api-key=${{ secrets.STRYKER_DASHBOARD_API_KEY }} --dashboard-project="github.com/${{ github.repository }}" --dashboard-version=${{ github.head_ref }}
+          dotnet stryker --baseline-storage-location=Dashboard --dashboard-api-key=${{ secrets.STRYKER_DASHBOARD_API_KEY }} --dashboard-project="github.com/${{ github.repository }}" --dashboard-version=${{ github.head_ref }}
           popd
