@@ -71,8 +71,7 @@ namespace Playground.Core.Tests
             Action action = () => coffee.ScheduleBrew(DateTimeOffset.Now.AddSeconds(-10));
             action.Should().Throw<ArgumentException>();
         }
-
-        
+    
         [Fact]
         public void CannotScheduleBrewInThePresent()
         {

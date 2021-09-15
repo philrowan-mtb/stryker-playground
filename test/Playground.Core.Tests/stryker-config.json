@@ -2,16 +2,15 @@
     "stryker-config": {
         "reporters": [            
             "dashboard",
-            "json"
+            "cleartext"
         ],
-        "log-level": "info",
-        "log-file": false,
-        "threshold-high": 80,
-        "threshold-low": 65,
-        "threshold-break": 50,
         "mutation-level": "Standard",
-        "excluded-mutations": [
+        "ignore-mutations": [
             "string"        
-        ]
+        ],
+        "project-info": {
+            "name": "github.com/philrowan-mtb/stryker-playground",
+            "version": "main"
+        }
     }
 }
