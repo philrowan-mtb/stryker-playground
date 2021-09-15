@@ -23,7 +23,7 @@ namespace Playground.Core
         public void ScheduleBrew(DateTimeOffset brewTime)
         {
             var now = DateTimeOffset.Now;
-            if (brewTime.Date < now.Date || (brewTime.Date == now.Date && brewTime.TimeOfDay.TotalMinutes <= now.TimeOfDay.TotalMinutes))
+            if (brewTime.Subtract(now).Ticks <= 0)
             {
                 throw new ArgumentException("Brewing time must be in the future", nameof(brewTime));
             }
